@@ -1,20 +1,13 @@
-type inputValue = string | number;
+import { useContext } from "react";
+import { ThemeContext } from "../App";
 
-const Box = <T extends inputValue>({
-  label,
-  value,
-  onChange,
-}: {
-  label: string;
-  value: T;
-  onChange: () => void;
-}) => {
+const Box = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  alert(theme);
   return (
-    <div>
-      <form>
-        <label>{label}</label>
-        <input type="text" value={value} onChange={onChange} />
-      </form>
+    <div className="boxContainer">
+      <h1>Box 1</h1>
+      <button onClick={toggleTheme}>Change Theme</button>
     </div>
   );
 };
