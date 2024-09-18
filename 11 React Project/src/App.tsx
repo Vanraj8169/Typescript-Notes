@@ -8,9 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import TodoItem from "./components/TodoItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getTodos, saveTodos } from "./utils/feauture";
 const App = () => {
-  const [todos, setTodos] = useState<TodoItemType[]>([]);
+  const [todos, setTodos] = useState<TodoItemType[]>(getTodos());
   const [title, setTitle] = useState<TodoItemType["title"]>("");
   const completeHandler = (id: TodoItemType["id"]): void => {
     const newTodos: TodoItemType[] = todos.map((i) => {
@@ -46,6 +47,10 @@ const App = () => {
 
     setTodos(newTodos);
   };
+
+  useEffect(() => {
+    saveTodos(todos);
+  }, [todos]);
   return (
     <Container maxWidth="sm" sx={{ height: "100vh" }}>
       <AppBar position="static">
